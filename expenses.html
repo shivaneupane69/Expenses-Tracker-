@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+
+    <style>
+        h1 {
+            margin-bottom: 0;
+            color: black;
+            text-align: center;
+        }
+
+        .box {
+            position: relative;
+            margin-top: 0;
+            text-align: center;
+            background-color: bisque;
+            color: purple;
+            padding: 20px;
+        }
+
+        .box img.right-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 120px;
+        }
+
+        .box img.left-image {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 120px;
+        }
+
+        .Add {
+            text-align: center;
+            background-color: bisque;
+            padding-bottom: 20px;
+        }
+
+        body {
+            background-color: #610ee75b;
+        }
+
+        input,
+        select {
+            width: 220px;
+            padding: 8px;
+        }
+
+        button {
+            padding: 10px 25px;
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="/add" method="POST">
+
+        <div class="box">
+
+            <h1>💵 Expenses Tracker</h1>
+            <h2>Add Expenses</h2>
+
+            <img src="pie.png" class="right-image" alt="Pie Chart">
+
+            <img src="budget.png" class="left-image" alt="Budget Icon">
+
+            <label>Expense Name:</label><br>
+            <input type="text" name="title" placeholder="Enter expense" required>
+
+            <br><br>
+
+            <label>Amount:</label><br>
+            <input type="number" name="amount" placeholder="Enter amount" required>
+
+            <br><br>
+
+            <label>Date:</label><br>
+            <input type="date" name="expense_date" required>
+
+            <br><br>
+
+            <label>Category:</label><br>
+
+            <select name="category">
+                <option value="Food">Food</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Other">Other</option>
+            </select>
+
+        </div>
+
+        <div class="Add">
+            <button type="submit">Add</button>
+            <br><br>
+        </div>
+
+    </form>
+
+</body>
+
+</html>
+
