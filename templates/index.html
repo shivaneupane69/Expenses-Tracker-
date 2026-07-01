@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #610ee75b; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: bisque; padding: 25px; border-radius: 12px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .panel { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        input, select { width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; }
+        button { padding: 10px 20px; background: green; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        button:hover { background: darkgreen; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+        .summary { font-size: 18px; font-weight: bold; margin-top: 10px; }
+        .actions a, .actions form { display: inline-block; margin-right: 8px; }
+        .actions button { padding: 6px 10px; background: #c0392b; }
+        .actions a { color: green; }
+        a { color: blue; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>💵 Expense Tracker</h1>
+                <p>Welcome, {{ username }}</p>
+            </div>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <div class="panel">
+            <h2>Add Expense</h2>
+            <form action="/add" method="POST">
+                <input type="text" name="title" placeholder="Expense name" required>
+                <input type="number" name="amount" placeholder="Amount (Rs)" step="0.01" required>
+                <input type="date" name="expense_date" required>
+                <select name="category">
+                    <option value="Food">Food</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button type="submit">Add Expense</button>
+            </form>
+        </div>
+
+        <div class="panel">
+            <h2>Your Expenses</h2>
+            <div class="summary">Total: ₹{{ total }}</div>
+            <table>
+                <tr><th>Title</th><th>Amount</th><th>Date</th><th>Category</th></tr>
+                {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense['title'] }}</td>
+                    <td>₹{{ expense['amount'] }}</td>
+                    <td>{{ expense['expense_date'] }}</td>
+                    <td>{{ expense['category'] }}</td>
+                    <td class="actions">
+                        <a href="/edit_expense/{{ expense['id'] }}">Edit</a>
+                        <form action="/delete_expense/{{ expense['id'] }}" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="4">No expenses added yet.</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

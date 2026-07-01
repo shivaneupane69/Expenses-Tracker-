@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Expense</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #610ee75b; padding: 20px; }
+        .container { max-width: 500px; margin: 40px auto; background: bisque; padding: 25px; border-radius: 12px; }
+        input, select { width: 100%; padding: 8px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; }
+        button { padding: 10px 20px; background: green; color: white; border: none; border-radius: 6px; cursor: pointer; }
+        a { color: blue; text-decoration: none; display: inline-block; margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Expense</h2>
+        <form action="/edit_expense/{{ expense['id'] }}" method="POST">
+            <input type="text" name="title" value="{{ expense['title'] }}" required>
+            <input type="number" name="amount" value="{{ expense['amount'] }}" step="0.01" required>
+            <input type="date" name="expense_date" value="{{ expense['expense_date'] }}" required>
+            <select name="category">
+                <option value="Food" {% if expense['category'] == 'Food' %}selected{% endif %}>Food</option>
+                <option value="Transportation" {% if expense['category'] == 'Transportation' %}selected{% endif %}>Transportation</option>
+                <option value="Entertainment" {% if expense['category'] == 'Entertainment' %}selected{% endif %}>Entertainment</option>
+                <option value="Utilities" {% if expense['category'] == 'Utilities' %}selected{% endif %}>Utilities</option>
+                <option value="Other" {% if expense['category'] == 'Other' %}selected{% endif %}>Other</option>
+            </select>
+            <button type="submit">Save Changes</button>
+        </form>
+        <a href="/home">Back to tracker</a>
+    </div>
+</body>
+</html>
